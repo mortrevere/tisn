@@ -6,7 +6,7 @@ Software env for an interactive and futuristic table
 
 #### Pixel object
 
-```json
+```js
 {
 	x : 12,
 	y : 25,
@@ -21,7 +21,7 @@ Software env for an interactive and futuristic table
 #### Frame 
 A frame is a *set* of pixels, such as : 
 
-```json
+```js
 [
 	{x : 12, y : 25, i : 75},
 	{x : 9, y : 27, i : 90},
@@ -35,7 +35,7 @@ A frame is a *set* of pixels, such as :
 #### Animation
 An animation is a list of frames, plus some properties
 
-```json
+```js
 {
 	name : "my awesome animation",
 	delta : 25,
