@@ -59,3 +59,49 @@ For 3 frames :
 
   - "loop" mode will do : 1 -> 2 -> 3 -> 1 -> 2 -> 3 ...
   - "rewind" mode will do : 1 -> 2 -> 3 -> 2 -> 1 -> 2 -> 3 ...
+
+# API reference
+To store and retrieve animations, the application has to communicate with the Pi embedded in the table. A dedicated REST API exists to do so.
+
+#### API infos :
+base url : http://table/api
+
+An error is detected by a response code differing from 200 or the presence of an error field in the response object
+
+## Saving animations
+
+#### New one
+
+PUT /animations
+  * _takes_ :
+    * animation (Animation object)
+  * _returns_ :
+    * Array
+      * animation (Animation object) <- all available animations
+
+#### Existing one
+
+POST /animations/**id**
+  * _takes_ :
+    * id (string)
+    * animation (Animation object)
+  * _returns_ :
+    * info _or_ error (string)
+
+## Getting available animations
+
+#### All
+
+GET /animations
+  * _returns_ :
+    * Array
+      * Animation objects <- all available animations
+
+#### One in particular
+
+GET /animations/**id**
+  * _takes_ :
+    * id (string)
+  * _returns_ :
+    * Array
+      * Animation objects <- all available animations
