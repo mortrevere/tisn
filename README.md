@@ -105,3 +105,35 @@ GET /animations/**id**
   * _returns_ :
     * Array
       * Animation objects <- all available animations
+
+## User space
+
+Animations can be *favorited* or *saved* by users
+
+
+#### Getting favorite animations
+
+GET /u/**nickname**/animations
+  * _takes_ :
+    * nickname (string)
+  * _returns_ :
+    * Array
+      * String (animation ids)
+
+#### Fav an animation
+
+POST /u/**nickname**/animations/**id**
+  * _takes_ :
+    * nickname (string)
+    * id (string)
+  * _returns_ :
+    * info _or_ error (string)
+
+#### Un-fav an animation
+
+DELETE /u/**nickname**/animations/**id**
+  * _takes_ :
+    * nickname (string)
+    * id (string)
+  * _returns_ :
+    * info _or_ error (string)

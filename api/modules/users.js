@@ -23,9 +23,6 @@ var checkAnimation = validator.isObject()
   .withRequired('duration', validator.isInteger())
   .withRequired('mode', validator.isString())
 
-
-
-
 module.exports = function(app, red) {
 
 app.get('/users', function(req, res) {
@@ -46,9 +43,9 @@ app.put('/users', function(req, res) {
   });
 });
 
-app.post('/connect', function(req, res) {
+/*app.post('/connect', function(req, res) {
 
-});
+});*/
 
 app.get('/animations', function(req, res) {
   red.hgetall('animations', function(err, object) {
@@ -58,6 +55,35 @@ app.get('/animations', function(req, res) {
     res.json(object);
   });
 });
+
+app.get('/u/:nick/animations', function(req, res) {
+  red.smembers(req.params.nick + '-animations', function(err, object) {
+    console.log(object);
+    if(object === null)
+      res.json(error("Cette utilisateur n'existe pas"));
+    else
+      res.json(object);
+  });
+});
+
+app.put('/u/:nick/animations/:id', function(req, res) {
+  red.sadd(req.params.nick + '-animations', req.params.id, function(err, reply) {
+    if(reply)
+      res.json(info("Animation ajoutée à la bibliothèque"));
+    else
+      res.json(error("Cette animation est déjà dans votre bibliothèque"));
+  });
+});
+
+app.delete('/u/:nick/animations/:id', function(req, res) {
+  red.srem(req.params.nick + '-animations', req.params.id, function(err, reply) {
+    if(reply)
+      res.json(info("Animation supprimée de la bibliothèque"));
+    else
+      res.json(error("Impossible de supprimer l'animation de votre bibliothèque"));
+  });
+});
+
 
 app.get('/animations/:id', function(req, res) {
   red.hget('animations', req.params.id, function(err, object) {
