@@ -106,10 +106,29 @@ GET /animations/**id**
     * Array
       * Animation objects <- all available animations
 
-## User space
+# User space
 
 Animations can be *favorited* or *saved* by users
 
+## Users
+
+#### Getting registered users
+
+GET /users
+ * _returns_ :
+    * Array
+      * String (nicknames)
+
+#### Adding a user
+
+PUT /users
+ * _takes_ :
+    * nickname (string)
+    * password (string)
+  * _returns_ :
+    * info _or_ error (string)
+
+## Fav
 
 #### Getting favorite animations
 
