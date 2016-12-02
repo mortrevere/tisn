@@ -125,7 +125,7 @@ PUT /users
  * _takes_ :
     * nickname (string)
     * password (string)
-  * _returns_ :
+ * _returns_ :
     * info _or_ error (string)
 
 ## Fav
