@@ -10,7 +10,10 @@ Software env for an interactive and futuristic table
 {
 	x : 12,
 	y : 25,
-	i : 75
+	i : 75,
+    r : 255,
+    g : 255,
+    b : 255
 }
 ```
 
@@ -23,9 +26,9 @@ A frame is a *set* of pixels, such as :
 
 ```js
 [
-	{x : 12, y : 25, i : 75},
-	{x : 9, y : 27, i : 90},
-	{x : 21, y : 8, i : 100}
+	{x : 12, y : 25, i : 75, r : 255, g : 255, b : 255},
+	{x : 9, y : 27, i : 90, r : 255, g : 255, b : 255},
+	{x : 21, y : 8, i : 100, r : 255, g : 255, b : 255}
 ]
 ```
 
@@ -42,9 +45,9 @@ An animation is a list of frames, plus some properties
 	duration : 150,
 	mode : "loop",
 	frames : [
-				[{x : 12, y : 25, i : 75},{x : 9, y : 27, i : 90}],
-				[{x : 13, y : 26, i : 95},{x : 10, y : 26, i : 75}],
-				[{x : 14, y : 27, i : 100},{x : 11, y : 25, i : 30}]
+				[{x : 12, y : 25, i : 75, r : 255, g : 255, b : 255},{x : 9, y : 27, i : 90, r : 255, g : 255, b : 255}],
+				[{x : 13, y : 26, i : 95, r : 255, g : 255, b : 255},{x : 10, y : 26, i : 75, r : 255, g : 255, b : 255}],
+				[{x : 14, y : 27, i : 100, r : 255, g : 255, b : 255},{x : 11, y : 25, i : 30, r : 255, g : 255, b : 255}]
 			 ]
 }
 ```

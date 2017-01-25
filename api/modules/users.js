@@ -13,6 +13,9 @@ var validator = require('node-validator');
 var checkPixel = validator.isObject()
   .withRequired('x', validator.isInteger())
   .withRequired('y', validator.isInteger())
+  .withRequired('r', validator.isInteger())
+  .withRequired('g', validator.isInteger())
+  .withRequired('b', validator.isInteger())
   .withRequired('i', validator.isInteger({min: 0, max: 100}));
 
 var checkFrame = validator.isArray(checkPixel);
@@ -43,6 +46,23 @@ app.put('/users', function(req, res) {
   });
 });
 
+app.put('/rfid', function(req, res) {
+  var nick = req.body.username;
+  var rfid = req.body.rfid;
+  red.hset('rfid-users', rfid, nick, function(err, reply) {
+    if(reply)
+      res.json(info("Nouveau RFID enregistré"));
+    else
+      res.json(error("RFID mis à jour"));
+  });
+});
+
+app.get('/rfid/:rfid', function(req, res) {
+  var rfid = req.body.rfid;
+  red.hget('rfid-users', rfid, function(err, reply) {
+    res.json(reply);
+  });
+});
 /*app.post('/connect', function(req, res) {
 
 });*/
