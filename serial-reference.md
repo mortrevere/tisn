@@ -57,7 +57,9 @@ void run()
 M stands for Master, S stands for Slave
 
 > S---M : init
+
 > M---S : id
+
 > S---M : *MODULE_NAME* //see beginning of previous code
 
 ------------------------------
