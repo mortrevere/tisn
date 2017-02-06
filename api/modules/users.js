@@ -116,7 +116,8 @@ app.get('/animations/:id', function(req, res) {
 });
 
 app.put('/animations', function(req, res) {
-  console.log(req.body);
+  //console.log(req.body);
+  console.log(JSON.stringify(req.body, null, 4));
 
   validator.run(checkAnimation, req.body.animation, function(errorCount, errors) {
     if(errorCount)
