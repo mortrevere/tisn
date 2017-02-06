@@ -120,7 +120,9 @@ Input select
 
 Frequencies indicator
 > [[f, i],...,[f, i]]
+
 > f in Hz, [20..20000]
+
 > i [1..100] or [0..1] or [0..255]
 
 
