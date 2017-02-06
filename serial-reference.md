@@ -95,8 +95,11 @@ None
 
 Lighting and color control
 > [[X,Y,R,G,B,I],....,[X,Y,R,G,B,I]]
-> X, Y : 
+
+> X, Y :
+
 > R, G, B : [0..255]
+
 > I : [0..255]
 
 #### Slave to master
