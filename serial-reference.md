@@ -82,9 +82,6 @@ Power off/on :
 Color control : 
 > color [0..255] [0..255] [0..255]
 
-Brightness control : 
-> brightness [0..255]
-
 #### Slave to master
 
 None
@@ -93,21 +90,27 @@ None
 
 #### Master to slave : 
 
-Lighting and color control
-> [[X,Y,R,G,B,I],....,[X,Y,R,G,B,I]]
+Lighting and color control.
 
-> X, Y :
+We'll be using indexed colors to describe the state of the array of LEDs.
+> The first byte is the number of colors (L) we'll be using
+> Colors are RGB and encoded as 24 bits, by concatenating values for R, G, and B values. You'll find exactly N blocks of 24 bits describing the colors in use.
+> After L*24 bits, each block of 24 bits describes the X, Y and Ci of pixels.
 
-> R, G, B : [0..255]
 
-> I : [0..255]
 
 #### Slave to master
 
 Touch indicator
-> X,Y
+> mtouch [[X,Y],...,[X,Y]] (multitouch support)
 
-Note : communications for this module needs to be efficient, hence the striped down protocol
+Gestures
+> swipe [lt, mt, rt, lb, mb, rb, tl, ml, bl, tr, mr, br]
+
+> first letter stands for point of origin (middle, top, left) on one axis
+
+> second letter stands for point of arrival (middle, top, left) on the other axis
+
 
 ## Microphone / FFT
 
