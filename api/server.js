@@ -58,7 +58,7 @@ app.enable('trust proxy');
 app.use(cors());
 app.use(morgan('dev'));
 //app.use(morgan('dev', {stream : fs.createWriteStream(__dirname + '/../access.log', {flags: 'a'})}));
-app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.json({limit: '5mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
@@ -71,49 +71,6 @@ app.all('*', function(req, res, next) {
   //res.header('Cache-Control', 'no-cache');
   //console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
   next();
-});
-
-app.all('/p/*', function(req, res, next) {
-  var token = req.header('token');
-  if(token === undefined) return res.status(400).json(Error(3,"Missing token."));
-  if(!isSHA(token)) return res.status(400).json(Error(31, "Malformed token"));
-
-  pg.connect(connectionURL, function(err, client, done) {
-    if(err) {
-      done();
-      console.log(err);
-      return res.status(500).json({ error: 1, info: "Unable to join master DB"});
-    }
-
-    var query = client.query("SELECT * FROM accounts WHERE token = $1;", [token]);
-
-    query.on('error', function(err) {
-      console.log(err);
-      return res.status(500).json(Error(0,"db error."));
-    });
-
-    query.on('row', function(row, result) {
-      result.addRow(row);
-    });
-
-    query.on('end', function(result) {
-      done();
-      if(result.rowCount)
-      {
-        row = result.rows[0];
-        req.userinfo = {};
-        req.userinfo.id = parseInt(row.id);
-        req.userinfo.club = parseInt(row.club);
-        req.userinfo.token = token;
-        next();
-      }
-      else
-      {
-        console.log("Invalid token :", token);
-        return res.status(403).json({ error: 11, info: "Invalid token." });
-      }
-    });
-  });
 });
 
 

@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<style>
+			.col {
+				height:40px;
+			}
+			
+			.line {
+				width:800px;
+			}
+			
+			table tr td {
+				border:1px solid black;
+			}
+			
+			table {
+				width:800px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div>
+			<table>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+				<tr class="line">
+
+				</tr>
+			</table>
+		</div>
+		<textarea>[[0,1,0], [0,2,0], [3,3,2], [5,2,1]]</textarea>
+		<input type="text" value="[[0,255,255],[0,255,0],[0,0,255]]"/>
+		<button>Go</button>
+	</body>
+
+	<script>
+		$(".line").each(function(i) {
+			el = $(this);
+			for(var j = 0; j < 26; j++)
+			{
+				el.append('<td class="col c' + i + '-' + j + '"></td>');
+			}
+		});
+		
+		
+		
+		var process = function() {
+			$("td").css('background-color', "#000");
+			var data = JSON.parse($("textarea").val());
+			var colors = JSON.parse($("input").val());
+			console.log(data, colors);
+			
+			data.forEach(function(entry) {
+				var pxId = '.c' + entry[0] + '-' + entry[1];
+				var color = colors[entry[2]];
+				console.log(pxId, color);
+				$(pxId).css('background-color', 'rgb(' + color.reduce(function(prev, next) { return prev + "," + next; }, "").substr(1) + ")"); 
+			});
+		};
+		
+		$("textarea").on("change", process);
+		$("button").on("click", process);
+	</script>
+
+</html>

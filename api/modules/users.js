@@ -25,6 +25,7 @@ var checkAnimation = validator.isObject()
   .withRequired('delta', validator.isInteger())
   .withRequired('duration', validator.isInteger())
   .withRequired('mode', validator.isString())
+  .withRequired('username', validator.isString())
 
 module.exports = function(app, red) {
 
